@@ -19,7 +19,7 @@ def test_site_up(monkeypatch):
 
     app.check_site(url)
 
-    assert metric("uptime_site_up", url) == 5
+    assert metric("uptime_site_up", url) == 1
     assert metric("uptime_site_status_code", url) == 200
 
 
