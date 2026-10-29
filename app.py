@@ -1,6 +1,8 @@
 """Uptime Monitor: checks websites and exposes Prometheus metrics."""
 import logging
 import os
+import signal
+import sys
 import time
 
 import requests
@@ -42,8 +44,12 @@ def check_site(url):
     SITE_UP.labels(url=url).set(1 if up else 0)
     CHECKS_TOTAL.labels(url=url, result="up" if up else "down").inc()
 
+def handle_sigterm(signum, frame):
+    log.info("Got SIGTERM, shutting down")
+    sys.exit(0)
 
 def main():
+    signal.signal(signal.SIGTERM, handle_sigterm)
     start_http_server(PORT)
     log.info("Serving metrics on :%d/metrics, checking %s every %ds", PORT, SITES, CHECK_INTERVAL)
     while True:
