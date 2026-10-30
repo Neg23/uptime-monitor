@@ -17,3 +17,10 @@ spec:
           image: ghcr.io/neg23/uptime-monitor:latest
           ports:
             - containerPort: 8000
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
