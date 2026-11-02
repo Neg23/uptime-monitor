@@ -64,7 +64,7 @@ jobs:
       - name: Smoke test
         run: |
           docker run -d --name smoke -p 8000:8000 uptime-monitor:test
-        curl --fail --retry 10 --retry-delay 1 --retry-all-errors http://localhost:8000/metrics
+          curl --fail --retry 10 --retry-delay 1 --retry-all-errors http://localhost:8000/metrics
           test "$(docker run --rm uptime-monitor:test id -u)" != "0"
 
       - name: Show container logs
