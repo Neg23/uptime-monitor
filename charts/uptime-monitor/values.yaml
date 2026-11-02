@@ -13,3 +13,8 @@ resources:
     memory: 128Mi
 service:
   port: 8000
+sites:
+  - https://google.com
+  - https://github.com
+  - https://wikipedia.com
+checkInterval: 60

@@ -15,6 +15,11 @@ spec:
       containers:
         - name: uptime-monitor
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          env:
+            - name: SITES
+              value: {{ join "," .Values.sites | quote }}
+            - name: CHECK_INTERVAL
+              value: {{ .Values.checkInterval | quote }}
           ports:
             - name: http
               containerPort: 8000
