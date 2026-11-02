@@ -6,4 +6,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app.py .
 USER 10001
 EXPOSE 8000
-CMD ["python","ap.py"]
+CMD ["python","app.py"]
