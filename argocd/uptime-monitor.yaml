@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: uptime-monitor
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Neg23/uptime-monitor.git
+    targetRevision: main
+    path: charts/uptime-monitor
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
