@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: ghcr.io/neg23/uptime-monitor
-  tag: "3a5d9e7eb0e3c7c4ee7e00d36c2ec52c56f3076a"
+  tag: "a52e11dd17efcf4841994e932c13be3d3d9f0d46"
 
 resources:
   requests:
