@@ -99,7 +99,8 @@ jobs:
       - uses: actions/checkout@v5
 
       - name: Set new image tag
-        run: sed -i "s/^  tag: .*/  tag: \"${{ github.sha }}\"/" charts/uptime-monitor/values.yaml
+        run: |
+          sed -i "s/^  tag: .*/  tag: \"${{ github.sha }}\"/" charts/uptime-monitor/values.yaml
 
       - name: Open PR
         env:
