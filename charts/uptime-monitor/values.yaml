@@ -16,5 +16,5 @@ service:
 sites:
   - https://google.com
   - https://github.com
-  - https://wikipedia.com
+  - https://amazon.com
 checkInterval: 60
