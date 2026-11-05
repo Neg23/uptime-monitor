@@ -88,3 +88,27 @@ jobs:
           tags: |
             ghcr.io/neg23/uptime-monitor:latest
             ghcr.io/neg23/uptime-monitor:${{ github.sha }}
+  update-tag:
+    needs: build
+    if: github.event_name == 'push' && !startsWith(github.event.head_commit.message, '[bot] Deploy image')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set new image tag
+        run: |
+          sed -i "s/^  tag: .*/  tag: \"${{ github.sha }}\"/" charts/uptime-monitor/values.yaml
+
+      - name: Open PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c deploy-${{ github.sha }}
+          git commit -am "[bot] Deploy image ${{ github.sha }}"
+          git push origin HEAD
+          gh pr create --title "[bot] Deploy image ${{ github.sha }}" --body "Update image tag to ${{ github.sha }}"
